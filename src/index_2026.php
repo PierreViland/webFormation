@@ -16,44 +16,60 @@ if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 <meta charset="UTF-8">
-<title>Menu formation</title>
+<title>Formation 2026</title>
 
 <style>
+
 body {
     font-family: Arial;
     padding: 40px;
 }
 
+.menu {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.message {
+    margin-top: 40px;
+    font-size: 20px;
+}
+
 a {
-    display:block;
-    margin:15px 0;
-    font-size:20px;
-    color:#0077cc;
-    text-decoration:none;
+    color: #0077cc;
+    text-decoration: none;
 }
 
 a:hover {
-    text-decoration:underline;
+    text-decoration: underline;
 }
+
 </style>
 
 </head>
 
 <body>
 
-<h2>Formation 2025</h2>
-
-<a href="index_2025.php">
-Accéder à la formation 2025
-</a>
+<div class="menu">
+<a href="index.php">⬅ Retour au menu principal</a>
+</div>
 
 
 <h2>Formation 2026</h2>
 
-<a href="index_2026.php">
-Accéder à la formation 2026
-</a>
+<div class="message">
+La formation 2026 sera disponible prochainement.
+</div>
+
+
+<br><br>
+
+<div class="menu">
+<a href="index.php">⬅ Retour au menu principal</a>
+</div>
+
 </body>
 </html>

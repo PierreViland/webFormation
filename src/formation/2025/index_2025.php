@@ -1,21 +1,53 @@
 <?php
-// Authentification basique en dur
-$valid_username = 'formationCyber';   
-$valid_password = 'acRennes!!2025';  
+require $_SERVER['DOCUMENT_ROOT']."/core/auth.php";
 
-if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])
-    || $_SERVER['PHP_AUTH_USER'] !== $valid_username
-    || $_SERVER['PHP_AUTH_PW'] !== $valid_password) {
-    
-    header('WWW-Authenticate: Basic realm="Accès restreint"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Authentification requise.';
-    exit;
+// Dossier à explorer
+$baseDir = realpath("/var/www/php/downloads/docpdf");
+if (!$baseDir || !is_dir($baseDir)) {
+    die("Dossier invalide ou introuvable.");
 }
+
+// Sous-chemin demandé
+$requestedPath = $_GET['path'] ?? '';
+$currentPath = realpath($baseDir . DIRECTORY_SEPARATOR . $requestedPath);
+
+// Sécurité
+if ($currentPath && strpos($currentPath, $baseDir) === 0 && file_exists($currentPath)) {
+
+    // Gestion fichiers AVANT header.php
+    if (is_file($currentPath)) {
+
+        $action = $_GET['action'] ?? 'view';
+        $mime = mime_content_type($currentPath);
+
+        if ($action === 'view') {
+            header('Content-Type: ' . $mime);
+            readfile($currentPath);
+            exit;
+        }
+
+        if ($action === 'download') {
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($currentPath) . '"');
+            header('Content-Length: ' . filesize($currentPath));
+            readfile($currentPath);
+            exit;
+        }
+    }
+
+} else {
+    die("Accès non autorisé ou fichier introuvable.");
+}
+
+/* SEULEMENT MAINTENANT */
+include $_SERVER['DOCUMENT_ROOT']."/core/header.php";
+?>
+
+<?php
 
 
 // Dossier à explorer
-$baseDir = realpath("/var/www/php/docpdf");
+$baseDir = realpath("/var/www/php/downloads/docpdf");
 if (!$baseDir || !is_dir($baseDir)) {
     die("Dossier invalide ou introuvable.");
 }
@@ -149,7 +181,7 @@ li {
 <body>
 
 <div class="menu">
-<a href="index.php">⬅ Retour au menu principal</a>
+<a href="../../index.php">⬅ Retour au menu principal</a>
 </div>
 
 <h2>Enoncés des activités 2025</h2>
@@ -161,7 +193,7 @@ li {
 <br><br>
 
 <div class="menu">
-<a href="index.php">⬅ Retour au menu principal</a>
+<a href="../../index.php">⬅ Retour au menu principal</a>
 </div>
 
 </body>

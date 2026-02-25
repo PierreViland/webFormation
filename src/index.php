@@ -1,59 +1,22 @@
 <?php
-// Authentification basique en dur
-$valid_username = 'formationCyber';   
-$valid_password = 'acRennes!!2025';  
-
-if (!isset($_SERVER['PHP_AUTH_USER']) || !isset($_SERVER['PHP_AUTH_PW'])
-    || $_SERVER['PHP_AUTH_USER'] !== $valid_username
-    || $_SERVER['PHP_AUTH_PW'] !== $valid_password) {
-    
-    header('WWW-Authenticate: Basic realm="Accès restreint"');
-    header('HTTP/1.0 401 Unauthorized');
-    echo 'Authentification requise.';
-    exit;
-}
+require $_SERVER['DOCUMENT_ROOT'] . "/core/auth.php";
+include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php";
 ?>
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Menu formation</title>
-
-<style>
-body {
-    font-family: Arial;
-    padding: 40px;
-}
-
-a {
-    display:block;
-    margin:15px 0;
-    font-size:20px;
-    color:#0077cc;
-    text-decoration:none;
-}
-
-a:hover {
-    text-decoration:underline;
-}
-</style>
-
-</head>
-
-<body>
+<h1>ATTENTION MOT DE PASSE ET FICHIER DE GENERATION A MODIFIER</h1>
 
 <h2>Formation 2025</h2>
 
-<a href="index_2025.php">
+<a href="formation/2025/index_2025.php">
 Accéder à la formation 2025
 </a>
 
-
 <h2>Formation 2026</h2>
 
-<a href="index_2026.php">
+<a href="formation/2026/index_2026.php">
 Accéder à la formation 2026
 </a>
-</body>
-</html>
+
+<?php
+include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php";
+?>

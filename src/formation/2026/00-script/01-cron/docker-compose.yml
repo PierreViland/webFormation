@@ -1,0 +1,9 @@
+services:
+  ctf-perms:
+    #build: .
+    image: t00-ch01-cron:latest
+    container_name: ctf-perms
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+

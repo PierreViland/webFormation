@@ -1,6 +1,6 @@
 services:
-  alpine-ssh:
-    image :  t00-ch00-setuid:latest 
+  docker-setuidPV:
+    image :  pviland/t00-ch00-setuid:latest 
       #ibuild: .
     container_name: chall00_PV
     ports:

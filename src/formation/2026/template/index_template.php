@@ -87,6 +87,45 @@ function toggleBox() {
 }
 </script>
 
+
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+            style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+        Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+        <h3>Contre‑mesures pour éviter ___________________</h3>
+
+        <p>Présentation</p>
+
+        <ul>
+            <li><strong>Éviter ___________</strong> : Priviléier :  <code>Mettre des bouts de code</code>.</li>
+        </ul>
+
+        <hr>
+
+        <h3>Lien avec le BTS</h3>
+
+        <ul>
+	 <li><strong>C10 - ------</strong></li>
+         <li>------------------</li>
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
+
+
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel
 ?>

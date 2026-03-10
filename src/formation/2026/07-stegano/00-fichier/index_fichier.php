@@ -80,6 +80,32 @@ function toggleBox() {
 }
 </script>
 
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+	    style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+	Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+	<hr>
+	
+	<h3>Lien avec le BTS</h3>
+
+	<ul>
+	 <li><strong>C09 Installer un réseau informatique</strong></li>
+	 <li>Système d'exploitation (Windows, Unix, virtualisation)</li>
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
 
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel

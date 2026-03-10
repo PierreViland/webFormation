@@ -88,6 +88,62 @@ function toggleBox() {
 }
 </script>
 
+
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+	    style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+	Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+	<p>Placer un mot de passe ou une clé directement dans un binaire est une erreur classique. Les outils comme <code>strings</code>, <code>objdump</code> ou <code>ghidra</code> permettent de les extraire facilement. Voici les protections couramment utilisées :</p>
+
+	<ul>
+	<li><strong>Ne jamais stocker de secrets en clair dans le code</strong> : mots de passe, clés API, tokens, identifiants… doivent être externalisés.</li>
+
+	<li><strong>Utiliser des variables d’environnement</strong> : charger les secrets au runtime plutôt que les compiler dans le binaire.</li>
+
+	<li><strong>Utiliser un coffre à secrets</strong> : Vault, AWS Secrets Manager, GCP Secret Manager, Azure Key Vault…</li>
+
+	<li><strong>Chiffrer les secrets</strong> : si un secret doit être embarqué, le stocker chiffré et le déchiffrer en mémoire seulement.</li>
+
+	<li><strong>Éviter les chaînes statiques</strong> : les constantes visibles dans la section .rodata sont triviales à extraire.</li>
+
+	<li><strong>Obfuscation légère</strong> (en dernier recours) :
+	- découper les chaînes
+	- XOR simple
+	- reconstruction dynamique
+
+	<li><strong>Analyser le binaire avant déploiement</strong> :
+	utiliser <code>strings</code>, <code>rabin2</code>, <code>ghidra</code> pour vérifier qu’aucun secret n’est présent.</li>
+
+	<li><strong>Utiliser des mécanismes d’authentification robustes</strong> : éviter les mots de passe codés en dur, préférer des mécanismes externes (PAM, OAuth, certificats…).</li>
+
+</ul>
+
+	<hr>
+	
+	<h3>Lien avec le BTS</h3>
+
+	<ul>
+	<li> <strong>C05 CONCEVOIR UN SYSTEME INFORMATIQUE </strong></li>
+	<li> Niveaux de sécurité attendus par la solution logicielle
+	<li><strong>C10 CODER</strong></li>
+	<li>Politiques internes et les référentiels externes liés à la sécurisation des applications...</li>
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel
 ?>

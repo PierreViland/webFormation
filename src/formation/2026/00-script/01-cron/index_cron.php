@@ -110,6 +110,50 @@ function toggleBox() {
 }
 </script>
 
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+            style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+        Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+	<ul>
+	<li><strong>Éviter les scripts modifiables</strong> : aucun script ou fichier exécuté par cron ne doit être modifiable par un utilisateur non privilégié.</li>
+	<li><strong>Utiliser des chemins absolus</strong> : dans les scripts lancés par cron, toujours appeler les binaires via leur chemin complet (ex. <code>/usr/bin/rsync</code>).</li>
+	<li><strong>Définir un PATH minimal</strong> : cron utilise un PATH réduit ; il doit être explicitement défini dans les scripts pour éviter l’exécution de binaires malveillants.</li>
+	<li><strong>Interdire les répertoires sensibles dans PATH</strong> : ne jamais inclure <code>/tmp</code>, <code>/home</code> ou tout répertoire modifiable par un utilisateur.</li>
+	<li><strong>Vérifier les permissions des répertoires</strong> : les répertoires contenant des scripts cron (ex. <code>/etc/cron.d</code>, <code>/etc/cron.daily</code>) doivent être en écriture uniquement pour root.</li>
+	<li><strong>Éviter les jokers dangereux</strong> : les commandes utilisant <code>*</code> ou des expansions de fichiers peuvent être détournées (ex. attaques via <code>--checkpoint-action</code> sur tar).</li>
+	<li><strong>Utiliser systemd timers</strong> : préférer des timers systemd, plus contrôlables et auditables que cron.</li>
+	<li><strong>Journaliser et auditer</strong> : surveiller les logs <code>/var/log/syslog</code> ou <code>/var/log/cron</code> pour détecter des comportements anormaux.</li>
+	<li><strong>Limiter les droits des comptes exécutant cron</strong> : si possible, exécuter les tâches avec un utilisateur dédié aux permissions minimales.</li>
+	<li><strong>Vérifier les dépendances</strong> : tout fichier appelé par un script cron (config, binaire, clé, répertoire) doit être protégé contre l’écriture.</li>
+	</ul>
+        <hr>
+
+        <h3>Lien avec le BTS</h3>
+
+        <ul>
+	 <li><strong>C10 - EXPLOITER UN RÉSEAU INFORMATIQUE</strong></li>
+                <li>Langages de Scripts</li>
+		<li> Scripts UNIX (bash/zsh)</li>
+		
+                <li><strong>C11 - MAINTENIR UN RESEAU INFORMATIQUE </strong></li>
+                <li> Droits d’accès</li> 
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel
 ?>

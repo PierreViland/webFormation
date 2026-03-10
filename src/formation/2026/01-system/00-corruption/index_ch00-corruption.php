@@ -33,20 +33,20 @@ int main()
 
     if (std::strcmp(mdp, monMdp) == 0)
     {
-        std::cout &lt;&lt; "Verification OK\n";
-        authentification = 1;
+	std::cout &lt;&lt; "Verification OK\n";
+	authentification = 1;
     }
 
     std::cout &lt;&lt; "authentification APRES : " &lt;&lt; authentification &lt;&lt; "\n";
 
     if (authentification)
     {
-        std::cout &lt;&lt; "\nAcces autorise. Le flag est :\n";
-        std::cout &lt;&lt; flag &lt;&lt; "\n";
+	std::cout &lt;&lt; "\nAcces autorise. Le flag est :\n";
+	std::cout &lt;&lt; flag &lt;&lt; "\n";
     }
     else
     {
-        std::cout &lt;&lt; "\nAcces non autorise\n";
+	std::cout &lt;&lt; "\nAcces non autorise\n";
     }
 
     return 0;
@@ -57,42 +57,42 @@ int main()
 <div style="margin-top: 30px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; max-width: 500px;">
     <h3>Vérifier votre réponse</h3>
     <form method="post">
-        <label for="answer">Entrez la réponse :</label><br>
-        <input type="text" name="answer" id="answer" style="width: 100%; padding: 5px; margin-top: 5px;" required><br><br>
-        <input type="submit" value="Vérifier" style="padding: 5px 10px;">
+	<label for="answer">Entrez la réponse :</label><br>
+	<input type="text" name="answer" id="answer" style="width: 100%; padding: 5px; margin-top: 5px;" required><br><br>
+	<input type="submit" value="Vérifier" style="padding: 5px 10px;">
     </form>
 
-    <?php
-    // Vérification de la réponse
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $userAnswer = trim($_POST['answer']);
-        $correctAnswer = "trop_de_caracteres_ca_deborde"; // <-- À REMPLIR : mettre la vraie réponse ici
+<?php
+// Vérification de la réponse
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$userAnswer = trim($_POST['answer']);
+	$correctAnswer = "trop_de_caracteres_ca_deborde"; // <-- À REMPLIR : mettre la vraie réponse ici
 
-        if ($userAnswer === $correctAnswer) {
-            echo '<p style="color: green; font-weight: bold;">OK ! Bravo ✅</p>';
-        } else {
-            echo '<p style="color: red; font-weight: bold;">NOK ! Dommage ❌</p>';
-        }
-    }
-    ?>
+	if ($userAnswer === $correctAnswer) {
+		echo '<p style="color: green; font-weight: bold;">OK ! Bravo ✅</p>';
+	} else {
+		echo '<p style="color: red; font-weight: bold;">NOK ! Dommage ❌</p>';
+	}
+}
+?>
 </div>
 
 <div class="challenge-container" style="display: flex; gap: 20px; margin-top: 20px;">
 
     <!-- Colonne gauche : Commandes utiles -->
     <div class="commands" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-        <h3>Étapes à suivre</h3>
+	<h3>Étapes à suivre</h3>
     Il suffit de lancer l'executable. Peux-être que Gdb est votre meilleur ami? 
 
     </div>
 
     <!-- Colonne droite : Fichiers à télécharger -->
     <div class="files" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
-        <h3>Fichiers à télécharger</h3>
-        <ul>
-            <!-- À REMPLIR : liens vers les fichiers -->
-            <li><a href="t00-ch00-corruption">t00-ch00-corruption</a></li>
-        </ul>
+	<h3>Fichiers à télécharger</h3>
+	<ul>
+	    <!-- À REMPLIR : liens vers les fichiers -->
+	    <li><a href="t00-ch00-corruption">t00-ch00-corruption</a></li>
+	</ul>
     </div>
 
 </div>
@@ -101,16 +101,16 @@ int main()
 <div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
 
     <button onclick="toggleBox()" 
-            style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
-        Afficher des éléments de correction (tricheur)
+	    style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+	Afficher des éléments de correction (tricheur)
     </button>
 
     <div id="boxContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
-        <p>
-         Element rapide de correction avec gdb </p>
+	<p>
+	 Element rapide de correction avec gdb </p>
 
-        <pre style="white-space: pre-wrap; width: 100%;">
+	<pre style="white-space: pre-wrap; width: 100%;">
 Objectif est de comprendre la gestion mémoire. Il faut y aller pas à pas et regarder l'impact du mot de passe sur la pile. Ci-dessous les commande utiles qui peuvent permettrent de trouver le flag. Il faudrait détailler plus.
 <pre><code>                                                                                                                                                                                                  
 ┌──(kali㉿kali)-[/media/sf_20-testCTF/ctf2026/t01-system/t01-ch00-corruption]
@@ -166,10 +166,76 @@ Acces autorise. Le falg est :
 
 <script>
 function toggleBox() {
-    const box = document.getElementById("boxContent");
-    box.style.display = box.style.display === "none" ? "block" : "none";
+	const box = document.getElementById("boxContent");
+	box.style.display = box.style.display === "none" ? "block" : "none";
 }
 </script>
+
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+	    style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+	Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+	<ul>
+	<li><strong>Utiliser des fonctions sûres</strong> : éviter les fonctions dangereuses comme <code>gets()</code>, <code>strcpy()</code>, <code>sprintf()</code>, <code>scanf("%s")</code>.
+Préférer <code>fgets()</code>, <code>strncpy()</code>, <code>snprintf()</code>, <code>scanf("%32s")</code>.</li>
+
+	<li><strong>Activer les protections du compilateur</strong> :
+		- <code>-fstack-protector</code>, <code>-fstack-protector-strong</code>
+		- <code>-D_FORTIFY_SOURCE=2</code>
+		- <code>-Wformat -Wformat-security</code></li>
+
+	<li><strong>Activer l’ASLR</strong> (Address Space Layout Randomization) :
+		rend les adresses mémoire imprévisibles, compliquant l’exploitation.</li>
+
+	<li><strong>Compiler en PIE</strong> (Position Independent Executable) :
+		permet une randomisation complète du binaire.</li>
+
+	<li><strong>Vérifier les tailles de buffers</strong> :
+		toujours contrôler la taille des entrées utilisateur avant de les copier.</li>
+
+	<li><strong>Utiliser des analyseurs statiques</strong> :
+		outils comme <code>clang-tidy</code>, <code>cppcheck</code>, <code>Coverity</code> pour détecter les débordements potentiels.</li>
+
+	<li><strong>Limiter les permissions du processus</strong> :
+		un overflow dans un programme root est catastrophique ; utiliser le principe du moindre privilège.</li>
+
+	<li><strong>Isoler les composants sensibles</strong> :
+		sandboxing, chroot, containers, seccomp pour limiter l’impact d’une exploitation.</li>
+
+	<li><strong>Activer les protections du linker</strong> :
+		- <code>-z noexecstack</code>
+		- <code>-z relro</code>
+		- <code>-z now</code></li>
+
+	<li><strong>Auditer régulièrement les binaires</strong> :
+		utiliser <code>checksec</code> pour vérifier les protections activées.</li>
+	</ul>
+
+	<hr>
+	
+	<h3>Lien avec le BTS</h3>
+
+	<ul>
+	 <li><strong>C10 CODER</strong></li>
+	 <li>Langage de développement</li>
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
+
+
 
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel

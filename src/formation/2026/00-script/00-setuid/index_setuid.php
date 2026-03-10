@@ -145,7 +145,7 @@ function toggleSolution() {
                 <li>Langages de Scripts</li>
 		<li> Scripts UNIX (bash/zsh)</li>
 		
-                <li><strong>C11 - MAINTENIR UN SYSTÈME ÉLECTRONIQUE</strong></li>
+                <li><strong>C11 - MAINTENIR UN RESEAU INFORMATIQUE </strong></li>
                 <li> Droits d’accès</li> 
 	</ul>
 

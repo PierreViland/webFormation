@@ -13,7 +13,8 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 
 <!-- Bloc des liens vers les autres modules -->
 <div class="tableau">
-    <a href="/formation/2026/02-cracking/00-crackmeSimple/index_crackeSimple.php">Cracking simple</a>
+    	<a href="/formation/2026/02-cracking/00-crackmeSimple/index_crackeSimple.php">Cracking simple</a>
+	<a href="/formation/2026/02-cracking/01-condition/index_condition.php">Condition</a>
 </div>
 
 

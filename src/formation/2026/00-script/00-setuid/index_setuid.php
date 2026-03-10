@@ -112,6 +112,51 @@ function toggleSolution() {
 }
 </script>
 
+<!-- BOUTON POUR AFFICHER LES CONTRE-MESURES -->
+<div style="width: 100%; padding: 20px; border: 1px solid #aaa; border-radius: 8px; margin-top: 30px;">
+
+    <button onclick="toggleCounter()"
+            style="padding: 10px 18px; font-size: 16px; cursor: pointer;">
+        Afficher les contre‑mesures et le lien avec le BTS CIEL
+    </button>
+
+    <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
+
+        <h3>Contre‑mesures pour éviter les abus de Setuid</h3>
+
+        <p>Le mécanisme <code>setuid</code> est puissant mais dangereux. Voici les principales protections utilisées en entreprise :</p>
+
+        <ul>
+            <li><strong>Éviter le setuid root</strong> : privilégier sudo avec des règles précises dans <code>/etc/sudoers</code>.</li>
+            <li><strong>Limiter le PATH</strong> : utiliser un PATH minimal et absolu dans les scripts sensibles.</li>
+            <li><strong>Utiliser des chemins absolus</strong> dans les programmes setuid (ex. <code>/usr/bin/apt</code> plutôt que <code>apt</code>).</li>
+            <li><strong>Désactiver setuid sur les systèmes de fichiers non sûrs</strong> (ex. <code>nosuid</code> dans /etc/fstab).</li>
+            <li><strong>Vérifier les permissions</strong> : aucun fichier modifiable par l’utilisateur ne doit être appelé par un binaire setuid.</li>
+            <li><strong>Utiliser des capabilities Linux</strong> plutôt que setuid root</strong> (ex. <code>cap_net_bind_service</code>).</li>
+            <li><strong>Auditer régulièrement</strong> les binaires setuid avec <code>find / -perm -4000</code>.</li>
+        </ul>
+
+        <hr>
+
+        <h3>Lien avec le BTS</h3>
+
+        <ul>
+	 <li><strong>C10 - EXPLOITER UN RÉSEAU INFORMATIQUE</strong></li>
+                <li>Langages de Scripts</li>
+		<li> Scripts UNIX (bash/zsh)</li>
+		
+                <li><strong>C11 - MAINTENIR UN SYSTÈME ÉLECTRONIQUE</strong></li>
+                <li> Droits d’accès</li> 
+	</ul>
+
+
+    </div>
+</div>
+
+<script> function toggleCounter() { 
+const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+</script>
+
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . "/core/footer.php"; // footer universel
 ?>

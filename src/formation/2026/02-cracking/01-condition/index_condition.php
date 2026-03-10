@@ -14,6 +14,11 @@ Ce programme demande un mot de passe… mais ne le vérifie jamais réellement.
 
 Votre objectif : analyser le binaire pour comprendre pourquoi la condition ne peut jamais être vraie
 et comment contourner cette logique pour afficher le message secret.
+
+</p>
+<p>
+<strong>Le programme a été compilé sur une VM Kali et donc peut s'executer sur une système Kali.</strong> 
+
 </p>
 
 <!-- Formulaire pour vérifier la réponse -->

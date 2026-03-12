@@ -12,6 +12,14 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 <body>
 <a href="../index_2026.php">⬅ Retour à la formation 2026</a>
 <h2>Web serveur</h2>
-<p>Contenu spécifique du challenge ici...</p>
+
+<p>Les challenges :  </p>
+
+<!-- Bloc des liens vers les autres modules -->
+<div class="tableau">
+    <a href="/formation/2026/09-webserver/00-serveurSimplePy/index_serveurSimplePy.php">Simple serveur Web</a>
+</div>
+
+
 </body>
 </html>

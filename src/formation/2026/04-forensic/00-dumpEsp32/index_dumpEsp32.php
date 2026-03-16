@@ -4,13 +4,13 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 ?>
 
 <div class="menu">
-    <a href="../index_webserveur.php">⬅ Retour au challenge serveur </a>
+    <a href="../index_forensic.php">⬅ Retour au challenge forensic</a>
 </div>
 
-<h2>Simple serveur python</h2>
+<h2>SetUID</h2>
 
 <p>
-Vous devez vous connectez pour trouver le flag. Le mot de passe est presque sous votre nez.
+Vous avez récupéré un dump mémoire d'un esp32 (Processeur Xtensa 32 bits little indian). Vous savez qu'une personne s'est connectér au réseau Wifi "salleCIEL". Vous voulez retrouver le mot de passe (le flag) de ce réseau wifi. A vous de jouer. 
 </p>
 
 <!-- Formulaire pour vérifier la réponse -->
@@ -26,7 +26,7 @@ Vous devez vous connectez pour trouver le flag. Le mot de passe est presque sous
     // Vérification de la réponse
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userAnswer = trim($_POST['answer']);
-        $correctAnswer = "unTienVautMieuxQueDeuxTuLAuras"; 
+        $correctAnswer = "rockstar"; // <-- mettre la vraie réponse ici
 
         if ($userAnswer === $correctAnswer) {
             echo '<p style="color: green; font-weight: bold;">OK ! Bravo ✅</p>';
@@ -43,17 +43,7 @@ Vous devez vous connectez pour trouver le flag. Le mot de passe est presque sous
     <div class="commands" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Étapes à suivre</h3>
         <pre>
-# Télécharger le fichier docker-compose .yml et lancer le container
-docker compose up -d
-
-# Sur un navigateur web, connecter vous à : 
-http://localhost:8080
-
-#Chercher alors le flag..
-
-# A LA FIN DU CHALLENGE : ARRÊTER ET SUPPRIMER LE CONTAINER 
-docker compose down
-
+# Télécharger le fichier docker-compose .bin et analyser le 
         </pre>
     </div>
 
@@ -61,7 +51,7 @@ docker compose down
     <div class="files" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Fichiers à télécharger</h3>
         <ul>
-            <li><a href="/formation/2026/09-webserver/00-serveurSimplePy/docker-compose.yml">docker-compose.yml</a></li>
+            <li><a href="/formation/2026/04-forensic/00-dumpEsp32/dumpEspEsp32.bin">dumpEspEsp32.bin</a></li>
         </ul>
     </div>
 
@@ -78,13 +68,10 @@ docker compose down
     <div id="boxContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
         <p>
-	Le concepteur du site a bien fait son travail. Il a utilisé un outil de versionning : Github. Il a même partagé son code mais attention dans son code il y a le mot de passe 
+	Il faut utiliser Ghidra (en sélectionnant comme processueur Xtensa 32 little). Il faut ensuite analyser le fichier. Ensuite, il faut affiher les chaines de caractères présents en mémoire. Le mot de passe est à coté (en mémoire) du nom du réseau Wifi
 	</p>
 
-	<p>
-	Erreur, courante, dans les sources du fichier app.py, le mot de passe apparaît en clair. 
-	</p>
-
+        </pre>
 
     </div>
 </div>
@@ -114,26 +101,24 @@ function toggleSolution() {
 
     <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
-        <h3>Contre‑mesures pour éviter les mots de passe dans les dépots</h3>
+        <h3>Contre‑mesures pour éviter la récupération des mots de passe dans les microcontroleur</h3>
+
 
         <ul>
-	    <li><strong>Ne jamais mettre de mot de passe dans des sources</strong> </li>
-	    <li> Utiser des varaibles d'environnement </li>
-	    <li> Utiliser des variables ou fichiers non versionnées (avec les var d'environnement </li>
-	    <li> Utiliser des outils de détection de secrets : Git-secrets ou des outils avant commit Git hooks, 
-        </ul>
+            <li><strong>Éviter les mots de passe en claire </strong> </li>
+	   <li> Utiliser des 'secure zone' </li> 	
+	</ul>
 
         <hr>
 
         <h3>Lien avec le BTS</h3>
 
         <ul>
-	 <li><strong>C08 - CODER</strong></li>
-                <li>Le code est verionné</li>
-		<li>Chaine d'intégraton et de déploimen</li>
+	 <li><strong>C06 - VALIDER UN SYSTEME INFORMATIQUE</strong></li>
+                <li>Sécuriser les réseaux</li>
 		
-                <li><strong>C03 - GERER UN PROJET </strong></li>
-                <li> Outils de gestion de projet</li> 
+         <li><strong>C09 - INSTALLER UN RESEAU INFORMATIQUE </strong></li>
+                <li> WLAN</li> 
 	</ul>
 
 

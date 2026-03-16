@@ -4,29 +4,31 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 ?>
 
 <div class="menu">
-    <a href="../index_webserveur.php">⬅ Retour au challenge serveur </a>
+    <a href="../index_forensic.php">⬅ Retour au challenge forensic</a>
 </div>
 
-<h2>Simple serveur python</h2>
+<h2>Docker – Secret caché dans une couche</h2>
 
 <p>
-Vous devez vous connectez pour trouver le flag. Le mot de passe est presque sous votre nez.
+Vous avez récupéré une image Docker nommée <strong>docker-problem</strong>. 
+Le développeur affirme avoir supprimé un fichier sensible (<code>flag.txt</code>) pendant la construction de l’image.
+<br><br>
+Votre objectif : <strong>retrouver le flag</strong> en analysant les couches de l’image Docker.
 </p>
 
 <!-- Formulaire pour vérifier la réponse -->
 <div style="margin-top: 30px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; max-width: 500px;">
     <h3>Vérifier votre réponse</h3>
     <form method="post">
-        <label for="answer">Entrez la réponse :</label><br>
+        <label for="answer">Entrez le flag :</label><br>
         <input type="text" name="answer" id="answer" style="width: 100%; padding: 5px; margin-top: 5px;" required><br><br>
         <input type="submit" value="Vérifier" style="padding: 5px 10px;">
     </form>
 
     <?php
-    // Vérification de la réponse
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userAnswer = trim($_POST['answer']);
-        $correctAnswer = "unTienVautMieuxQueDeuxTuLAuras"; 
+        $correctAnswer = "ca craint la conf docker!!"; // <-- mettre la vraie réponse ici
 
         if ($userAnswer === $correctAnswer) {
             echo '<p style="color: green; font-weight: bold;">OK ! Bravo ✅</p>';
@@ -42,26 +44,30 @@ Vous devez vous connectez pour trouver le flag. Le mot de passe est presque sous
     <!-- Colonne gauche : Commandes utiles -->
     <div class="commands" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Étapes à suivre</h3>
-        <pre>
-# Télécharger le fichier docker-compose .yml et lancer le container
-docker compose up -d
+    <pre>
+# 1) Récupérer l'image Docker depuis Docker Hub
+docker pull pviland/t04-ch01-dockerprobleme
 
-# Sur un navigateur web, connecter vous à : 
-http://localhost:8080
+# 2) Vérifier l'historique de construction
+docker history pviland/t04-ch01-dockerprobleme
 
-#Chercher alors le flag..
+# 3) Exporter l'image au format tar
+docker save -o dockerprobleme.tar pviland/t04-ch01-dockerprobleme
 
-# A LA FIN DU CHALLENGE : ARRÊTER ET SUPPRIMER LE CONTAINER 
-docker compose down
+# 4) Extraire le contenu de l'image
+tar -xf dockerprobleme.tar
 
-        </pre>
-    </div>
+# 5) Explorer les couches (format OCI)
+
+</pre>
+
+   </div>
 
     <!-- Colonne droite : Fichiers à télécharger -->
     <div class="files" style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 8px;">
         <h3>Fichiers à télécharger</h3>
         <ul>
-            <li><a href="/formation/2026/09-webserver/00-serveurSimplePy/docker-compose.yml">docker-compose.yml</a></li>
+            <li>Rien n'est à télécharger. Juste pull d'une image docker</a></li>
         </ul>
     </div>
 
@@ -78,13 +84,25 @@ docker compose down
     <div id="boxContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
         <p>
-	Le concepteur du site a bien fait son travail. Il a utilisé un outil de versionning : Github. Il a même partagé son code mais attention dans son code il y a le mot de passe 
-	</p>
+        L’image Docker utilise le format OCI. Les couches se trouvent dans <code>blobs/sha256/</code>.
+        <br><br>
+        En lisant <code>manifest.json</code>, vous obtenez la liste des digests correspondant aux couches.
+        <br><br>
+        Chaque digest est un fichier tar.gz contenant une couche. Il suffit de les extraire un par un :
+        </p>
 
-	<p>
-	Erreur, courante, dans les sources du fichier app.py, le mot de passe apparaît en clair. 
-	</p>
+<pre>
+tar -xf blobs/sha256/<digest> -C /tmp/layer
+find /tmp/layer | grep flag
+</pre>
 
+        <p>
+        Le fichier <code>flag.txt</code> apparaît dans la couche correspondant à l’instruction :
+        <br>
+        <code>COPY flag.txt /opt/flag.txt</code>
+        <br><br>
+        Même si le fichier a été supprimé dans une couche suivante, il reste présent dans l’historique.
+        </p>
 
     </div>
 </div>
@@ -93,14 +111,6 @@ docker compose down
 function toggleBox() {
     const box = document.getElementById("boxContent");
     box.style.display = box.style.display === "none" ? "block" : "none";
-}
-</script>
-
-
-<script>
-function toggleSolution() {
-    const sol = document.getElementById("solution");
-    sol.style.display = sol.style.display === "none" ? "block" : "none";
 }
 </script>
 
@@ -114,34 +124,31 @@ function toggleSolution() {
 
     <div id="counterContent" style="display: none; margin-top: 20px; background: #f8f8f8; padding: 15px; border-radius: 6px;">
 
-        <h3>Contre‑mesures pour éviter les mots de passe dans les dépots</h3>
+        <h3>Contre‑mesures pour éviter les fuites de secrets dans Docker</h3>
 
         <ul>
-	    <li><strong>Ne jamais mettre de mot de passe dans des sources</strong> </li>
-	    <li> Utiser des varaibles d'environnement </li>
-	    <li> Utiliser des variables ou fichiers non versionnées (avec les var d'environnement </li>
-	    <li> Utiliser des outils de détection de secrets : Git-secrets ou des outils avant commit Git hooks, 
+            <li><strong>Ne jamais copier de secrets dans une image Docker</strong></li>
+            <li>Utiliser <strong>.dockerignore</strong> pour exclure les fichiers sensibles</li>
+            <li>Utiliser des <strong>multi‑stage builds</strong></li>
+            <li>Utiliser des <strong>secrets runtime</strong> (BuildKit, Vault…)</li>
         </ul>
 
         <hr>
 
-        <h3>Lien avec le BTS</h3>
+        <h3>Lien avec le BTS CIEL</h3>
 
         <ul>
-	 <li><strong>C08 - CODER</strong></li>
-                <li>Le code est verionné</li>
-		<li>Chaine d'intégraton et de déploimen</li>
-		
-                <li><strong>C03 - GERER UN PROJET </strong></li>
-                <li> Outils de gestion de projet</li> 
-	</ul>
-
+            <li><strong>C09 – Installer un réseau informatique</strong> : Systèmes d’exploitations (Windows, UNIX, virtualisations) </li>
+        </ul>
 
     </div>
 </div>
 
-<script> function toggleCounter() { 
-const box = document.getElementById("counterContent"); box.style.display = box.style.display === "none" ? "block" : "none"; } 
+<script>
+function toggleCounter() {
+    const box = document.getElementById("counterContent");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
 </script>
 
 <?php

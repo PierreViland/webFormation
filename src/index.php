@@ -3,7 +3,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/core/auth.php";
 include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php";
 ?>
 
-<h1>ATTENTION MOT DE PASSE ET FICHIER DE GENERATION A MODIFIER</h1>
+<h1>A modifier : méthode d'authentification</h1>
 
 <h2>Formation 2025</h2>
 

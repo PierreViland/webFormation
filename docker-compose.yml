@@ -15,6 +15,9 @@ services:
         #- /etc/letsencrypt/:/etc/letsencrypt/
         #user: "1000:1000"
     working_dir: /var/www/php  # Répertoire de travail
+    environment:
+      - LOGIN_USER=${LOGIN_USER}
+      - LOGIN_HASH=${LOGIN_HASH}
     depends_on:
       - php  # Dépend du service php
     networks:
@@ -32,6 +35,9 @@ services:
         #  - mysql  # Dépend du service MySQL
     networks:
       - mynet
+    environment:
+      - LOGIN_USER=${LOGIN_USER}
+      - LOGIN_HASH=${LOGIN_HASH}
 
   # Service MySQL
   #EN COMMENTAIRE CAR PAS UTILE POUR LA MANIP

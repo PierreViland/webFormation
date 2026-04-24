@@ -7,7 +7,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
     <a href="../index_forensic.php">⬅ Retour au challenge forensic</a>
 </div>
 
-<h2>SetUID</h2>
+<h2>Dump mémoire</h2>
 
 <p>
 Vous avez récupéré un dump mémoire d'un esp32 (Processeur Xtensa 32 bits little indian). Vous savez qu'une personne s'est connectér au réseau Wifi "salleCIEL". Vous voulez retrouver le mot de passe (le flag) de ce réseau wifi. A vous de jouer. 

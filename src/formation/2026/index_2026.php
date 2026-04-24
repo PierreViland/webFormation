@@ -22,6 +22,8 @@ include $_SERVER['DOCUMENT_ROOT']."/core/header.php";
     <a href="/formation/2026/08-webclient/index_webclient.php">Web client</a>
     <a href="/formation/2026/09-webserver/index_webserveur.php">Web serveur</a>
     <a href="/formation/2026/10-osint/index_osint.php">OSINT</a>
+    <a href="/formation/2026/11-realist/index_realist.php">Realist</a>
+
 </div>
 
 <div class="menu">

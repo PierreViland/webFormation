@@ -12,7 +12,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 
 <!-- Bloc des liens vers les autres modules -->
 <div class="tableau">
-        <a href="/formation/2026/02-cracking/00-caesar/index_caesar.php">Jules et la crypto</a>
+        <a href="/formation/2026/03-cryptoanalyse/00-cesar/index_cesar.php">Jules et la crypto</a>
 </div>
 
 

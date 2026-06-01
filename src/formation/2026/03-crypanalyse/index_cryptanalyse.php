@@ -2,17 +2,22 @@
 require $_SERVER['DOCUMENT_ROOT'] . "/core/auth.php"; // auth universel
 include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 ?>
+<div class="menu">
+    <a href="../index_2026.php">⬅ Retour à la formation 2026</a>
+</div>
+
+<h2>Cryppto</h2>
+
+<p>Les challenges :  </p>
+
+<!-- Bloc des liens vers les autres modules -->
+<div class="tableau">
+        <a href="/formation/2026/02-cracking/00-caesar/index_caesar.php">Jules et la crypto</a>
+</div>
 
 
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Cryptoanalyse</title>
-</head>
-<body>
-<a href="../index_2026.php">⬅ Retour à la formation 2026</a>
-<h2>Cryptoanalyse</h2>
-<p>Contenu spécifique du challenge ici...</p>
-</body>
-</html>
+
+<?php
+include $_SERVER['DOCUMENT_ROOT'] ."/core/footer.php";     // footer avec </main> et </body></html>
+?>
+

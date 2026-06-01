@@ -16,6 +16,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 <!-- Bloc des liens vers les autres modules -->
 <div class="tableau">
     <a href="/formation/2026/06-reseau/00-connexionHttp/index_connexionHttp.php">connexion Http</a>
+    <a href="/formation/2026/06-reseau/02-analyseLog/index_analyseLog.php">Analyse attaque</a>	
 </div>
 
 

@@ -18,6 +18,7 @@ include $_SERVER['DOCUMENT_ROOT'] . "/core/header.php"; // header universel
 <!-- Bloc des liens vers les autres modules -->
 <div class="tableau">
     <a href="/formation/2026/09-webserver/00-serveurSimplePy/index_serveurSimplePy.php">Simple serveur Web</a>
+    <a href="/formation/2026/09-webserver/01-petitDetournement/index_petitDetournement.php">Petit Détournement </a>
 </div>
 
 
